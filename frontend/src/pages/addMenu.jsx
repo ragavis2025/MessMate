@@ -1,35 +1,40 @@
-
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { addMenuSchema } from "../components/FormSchema/addMenuSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function AddMenu() {
-  const [day, setDay] = useState("");
-  const [breakfast, setBreakfast] = useState("");
-  const [lunch, setLunch] = useState("");
-  const [dinner, setDinner] = useState("");
+    const navigate = useNavigate();
+    const { register,handleSubmit,formState: { errors }} = useForm({
+        resolver: zodResolver(addMenuSchema)
+    });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+    function onSubmit1(data) {
+        console.log("Weekly Menu:", data);
+        alert("Menu Added Successfully");
+        navigate("/adminDashboard");
+    }
 
-    console.log({ day, breakfast, lunch, dinner });
-  };
-
-  return (
-    <div>
-      <h1 className = "text-blue-500">Add Weekly Menu</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label>Day:</label><br />
-        <input type="text" placeholder="Day" required value={day} onChange={(e) => setDay(e.target.value)}/><br />
-        <label>Breakfast:</label><br />
-        <input type="text" placeholder="Enter Breakfast" required value={breakfast} onChange={(e) => setBreakfast(e.target.value)}/><br />
-        <label>Lunch:</label><br />
-        <input type="text" placeholder="Enter Lunch" required value={lunch} onChange={(e) => setLunch(e.target.value)}/><br />
-        <label>Dinner:</label><br />
-        <input type="text" placeholder="Enter Dinner" required value={dinner} onChange={(e) => setDinner(e.target.value)}/><br />
-        <button type="submit">Add Menu</button>
-      </form>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Add Weekly Menu</h1>
+            <form onSubmit={handleSubmit(onSubmit1)}>
+                <label>Enter Day</label><br />
+                <input type="text" required placeholder="Enter Day" {...register("day")}/>
+                <p>{errors.day?.message}</p>
+                <label>Breakfast</label><br />
+                <input type="text" required placeholder="Enter Breakfast" {...register("breakfast")}/>
+                <p>{errors.breakfast?.message}</p>
+                <label>Lunch</label><br />
+                <input type="text" required placeholder="Enter Lunch" {...register("lunch")}/>
+                <p>{errors.lunch?.message}</p>
+                <label>Dinner</label><br />
+                <input type="text" required placeholder="Enter Dinner" {...register("dinner")}/>
+                <p>{errors.dinner?.message}</p>
+                <button type="submit">Add Menu</button>
+            </form>
+        </div>
+    );
 }
 
 export default AddMenu;

@@ -1,29 +1,35 @@
-import { useState } from "react"
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { loginSchema } from "../components/FormSchema/loginSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 function Login() {
-    const [name,setName]=useState("");
-    const [email,setEmail]=useState("");
-    const [password,setPassword]=useState("");
-    const handleSubmit=(event)=>{
-        event.preventDefault();
-        console.log({ name,email,password });
-    };
-  return (
+    const navigate = useNavigate();
+    const {register,handleSubmit,formState: { errors }} = useForm({
+        resolver: zodResolver(loginSchema)
+    });
 
-   <>
-   <h1 className="text-2xl text-blue-500">Mess-Mate Admin Login</h1>
-   <form onSubmit={handleSubmit}>
-    <label>Admin name:</label><br />
-    <input type="text" required placeholder="Enter your name" value={name} onChange={(e)=>setName(e.target.value)}/><br />
-    <label>Admin Email:</label><br />
-    <input type="email" required placeholder="Enter your email" value={email} onChange={(e)=>setEmail(e.target.value)}/><br />
-    <label>Password:</label><br />
-    <input type="password" required placeholder="Enter your password" value={password} onChange={(e)=>setPassword(e.target.value)}/><br />
-    <button type="submit">Submit</button>
-   </form>
-   </>
-  )
+    function onSubmit1(data) {
+        console.log("Login Details:", data);
+        alert("Login Successful");
+        navigate("/studentDashboard");
+    }
+
+    return (
+        <div>
+            <h1>MessMate Login</h1>
+            <form onSubmit={handleSubmit(onSubmit1)}>
+                <label>Email: </label><br />
+                <input type="email" required placeholder="Enter your email" {...register("email")}/>
+                <p>{errors.email?.message}</p>
+                <label>Password: </label><br />
+                <input type="password" placeholder="Enter your password" {...register("password")}/>
+                <p>{errors.password?.message}</p>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    );
 }
 
 export default Login;

@@ -1,7 +1,7 @@
 function ViewFeedback() {
   return (
     <div>
-      <h1>View Student Feedback Page</h1>
+      <h1>Student Feedback Page</h1>
     </div>
   )
 }
