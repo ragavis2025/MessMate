@@ -1,7 +1,7 @@
 function Register() {
   return (
     <div>
-      <h1>Student Registration Page</h1>
+      <h1>Student Register Page</h1>
     </div>
   )
 }
