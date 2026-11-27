@@ -11,7 +11,7 @@ function FeedBack() {
 
     function onSubmit1(data) {
         console.log("Student Feedback:", data);
-        alert("Feedback Submitted Successfully");
+        alert("Feedback Submitted Successfully!!!");
         navigate("/studentDashboard");
     }
 
