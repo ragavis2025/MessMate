@@ -33,7 +33,7 @@ function Login() {
     return (
         <div className="min-h-screen bg-slate-100 flex justify-center items-center p-6">
           <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg">
-            <h1 className="text-4xl font-bold text-teal-700 text-center mb-2">MessMate Login</h1>
+            <h1 className="text-4xl font-bold text-teal-700 text-center mb-2">MessMate Login Page</h1>
             <h2 className="text-xl text-slate-600 text-center mb-4">Welcome Back!</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email" className="block font-semibold text-slate-700 mb-2">Email: </label>
