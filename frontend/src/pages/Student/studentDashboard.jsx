@@ -1,4 +1,10 @@
+import API from "../../components/api";
+
 function StudentDashboard() {
+    const checkendpoint = async ()=>{
+        const response = await API.get("/api/get")
+        console.log(response.data);
+    }
     return (
         <div className="min-h-screen bg-slate-100 p-6">
 
@@ -14,7 +20,8 @@ function StudentDashboard() {
                 <li>View Weekly Mess Menu</li>
                 <li>Submit Meal Feedback</li>
                 <li>Update Personal Details</li>
-            </ul>
+            </ul><br />
+            <button onClick={checkendpoint}>Button1 for checking backend connection</button>
             </div>
         </div>
     );

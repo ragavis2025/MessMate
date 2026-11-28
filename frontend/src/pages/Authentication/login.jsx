@@ -21,7 +21,9 @@ function Login() {
         const registerdata = location.state;
         if(registerdata.email === logindata.email && registerdata.password === logindata.password){
             console.log("Login successful");
-            navigate("/student/dashboard");
+            navigate("/student/dashboard",{
+                state:logindata
+            });
         }
         else{
             console.log("Invalid email or password");
